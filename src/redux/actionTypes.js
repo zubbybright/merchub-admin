@@ -1,0 +1,5 @@
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const IS_LOADING = 'IS_LOADING'
+export const IS_BTN_DISABLED = 'IS_BTN_DISABLED'
+export const RESTORE_TOKEN = 'RESTORE_TOKEN'
