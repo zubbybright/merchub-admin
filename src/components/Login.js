@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './css/Login.css';
-import { login, isAppLoading, isBtnDisabled } from '../redux/actions';
+import { login, isAppLoading, isBtnDisabled} from '../redux/actions';
 import {adminLogin} from './agents/api';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 export default function Login(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const [userName,setUsername]= useState('');
     const [password, setPassword] = useState('');
     const auth =useSelector(state => state.auth);
+    const common = useSelector(state => state.common);
     
     const onChangeUsername = (evt) => {
         setUsername(evt.target.value);
@@ -18,18 +21,24 @@ export default function Login(){
     }
 
     const loginAdmin = async()=>{
-       
+        dispatch(isBtnDisabled(true));
+        dispatch(isAppLoading(true));
         try{
             console.log('logging');
             const {access_token, username,first_name, last_name,role} = await adminLogin(userName,password);
             dispatch(login(access_token,username,first_name, last_name,role));
             localStorage.setItem('token', auth.userToken);
+            history.push('/dashboard');
         }
         catch(error){
             console.log(error);
         }
+        dispatch(isAppLoading(false));
     }
 
+    useEffect(() => {
+        (userName.length === 0 || password.length === 0) ?dispatch(isBtnDisabled(true)): dispatch(isBtnDisabled(false))
+    },[userName, password]);
     return (
         <div >
             <img className="logo" src="./logo.png" alt="logo"></img>
@@ -43,7 +52,7 @@ export default function Login(){
                         value = {userName} onChange={onChangeUsername} placeholder="Username" name="username" required />
                         <input className="login-text-input" minLength="4" type="password" 
                         value = {password} onChange={onChangePassword} placeholder="Password" name="password" required />
-                        <button className="submit-btn" onClick={loginAdmin} type="button" >Login</button>
+                        <button disabled={common.isBtnDisabled} className="submit-btn" onClick={loginAdmin} type="button" >{common.isAppLoading?'Logging in':'Login'}</button>
                     </div>
                 </form>
                 </div>
