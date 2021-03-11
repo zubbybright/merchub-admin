@@ -6,6 +6,22 @@
   height: 40vmin;
   pointer-events: none;
 }
+ a:link,  a:visited {
+  padding: 28px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: large;
+}
+
+ a:hover,  a:active {
+  padding: 28px 25px;
+  background-color: rgb(101, 38, 250);
+  color: white;
+  font-weight: 500;
+  font-size: large;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,26 +29,3 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

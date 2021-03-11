@@ -1,0 +1,27 @@
+.logo{
+    width: 5rem;
+    height: 5rem;
+ }
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color:white;
+    display: flex;
+}
+.header div{
+    border: 1px solid #28035365;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
+}
+
+.logout{
+    align-self: center;
+}
+
+@media only screen and (max-width: 600px){
+    .header{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+  }
