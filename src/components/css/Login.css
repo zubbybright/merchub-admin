@@ -26,8 +26,11 @@ body {
     display: flex;
     justify-content: center;
     padding: 50px;
-   
-
+}
+.error-message{
+    color: red;
+    font-size: larger;
+    font-weight: 600;
 }
 .login-text{
     text-align: center;
@@ -52,6 +55,16 @@ body {
     background-color:grey;
     color:#fff;
     font-size: large;
+    font-weight:600;
+    border-radius:5px;
+    width:100%;
+}
+.submit-btn-disabled{
+    padding:20px;
+    border:none;
+    color:grey;
+    background-color: aliceblue;
+     font-size: large;
     font-weight:600;
     border-radius:5px;
     width:100%;

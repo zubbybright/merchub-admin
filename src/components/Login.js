@@ -10,8 +10,10 @@ export default function Login(){
     const history = useHistory();
     const [userName,setUsername]= useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
     const auth =useSelector(state => state.auth);
     const common = useSelector(state => state.common);
+
     
     const onChangeUsername = (evt) => {
         setUsername(evt.target.value);
@@ -31,7 +33,8 @@ export default function Login(){
             history.push('/dashboard');
         }
         catch(error){
-            console.log(error);
+            if(error.response.data.message)
+                setError(true);
         }
         dispatch(isAppLoading(false));
     }
@@ -48,11 +51,17 @@ export default function Login(){
                 <div className="login-text"> Login Here</div>
                 <form className="form">
                     <div>
+                        { error &&
+                            <div className="error-message">Invalid Username or Password</div>
+                        }
                         <input className="login-text-input"  type="text" autoComplete="off" 
-                        value = {userName} onChange={onChangeUsername} placeholder="Username" name="username" required />
+                        value = {userName} onChange={onChangeUsername} placeholder="Username" 
+                        name="username" required />
                         <input className="login-text-input" minLength="4" type="password" 
-                        value = {password} onChange={onChangePassword} placeholder="Password" name="password" required />
-                        <button disabled={common.isBtnDisabled} className="submit-btn" onClick={loginAdmin} type="button" >{common.isAppLoading?'Logging in':'Login'}</button>
+                        value = {password} onChange={onChangePassword} placeholder="Password" 
+                        name="password" required />
+                        <button disabled={common.isBtnDisabled} className={common.isBtnDisabled?"submit-btn-disabled":"submit-btn"} 
+                        onClick={loginAdmin} type="button" >{common.isLoading ?'Logging in':'Login'}</button>
                     </div>
                 </form>
                 </div>
