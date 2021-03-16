@@ -6,22 +6,7 @@
   height: 40vmin;
   pointer-events: none;
 }
- a:link,  a:visited {
-  padding: 28px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 500;
-  font-size: large;
-}
 
- a:hover,  a:active {
-  padding: 28px 25px;
-  background-color: rgb(101, 38, 250);
-  color: white;
-  font-weight: 500;
-  font-size: large;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

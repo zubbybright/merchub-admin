@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { Button } from 'react-bootstrap';
 
 export default function Logout(){
     const history = useHistory();
@@ -10,11 +10,9 @@ export default function Logout(){
         history.push('/');
     }
    
-    return(
-        
-     <button style={{padding:'1rem', background:'white', border:'0px',
-        color:'navy', fontSize:'large', fontWeight:'500', }} 
-     onClick={logout}>Logout</button>
+    return(  
+     <Button variant="outline-success"
+     onClick={logout}>Logout</Button>
     )
 
 }

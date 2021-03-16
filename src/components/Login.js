@@ -41,7 +41,7 @@ export default function Login(){
 
     useEffect(() => {
         (userName.length === 0 || password.length === 0) ?dispatch(isBtnDisabled(true)): dispatch(isBtnDisabled(false))
-    },[userName, password]);
+    },[userName, password, dispatch]);
     return (
         <div >
             <img className="logo" src="./logo.png" alt="logo"></img>
