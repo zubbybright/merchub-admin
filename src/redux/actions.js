@@ -1,4 +1,4 @@
-import {LOGIN , IS_LOADING, IS_BTN_DISABLED} from "./actionTypes";
+import {LOGIN , IS_LOADING, IS_BTN_DISABLED, CATEGORIES_LOADED, PRODUCTS_LOADED} from "./actionTypes";
 
 
 export const login = (access_token, username,first_name, last_name,role) => ({
@@ -19,3 +19,13 @@ export const isAppLoading = (value) => ({
     type: IS_LOADING,
     isLoading:value
 });
+
+export const categoriesFetch = (categories) => ({
+    type : CATEGORIES_LOADED,
+    categories
+});
+
+export const productsFetched = (products) =>({
+    type : PRODUCTS_LOADED,
+    products
+})
