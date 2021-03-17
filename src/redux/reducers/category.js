@@ -1,16 +1,16 @@
-import { PRODUCTS_LOADED } from "../actionTypes";
+import { CATEGORIES_LOADED  } from "../actionTypes";
 
 const defaultState = {
-products:[],
+categories:[]
 }
 
 export default (state = defaultState, action) => {
 
   switch(action.type) {
-    case PRODUCTS_LOADED:
+    case CATEGORIES_LOADED:
       return {
         ...state,
-        products: action.products,
+        categories: action.categories,
       };
     default:
         return state;

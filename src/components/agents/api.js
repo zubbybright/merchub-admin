@@ -16,3 +16,15 @@ export const adminLogin = async (userName, password) => {
 	};
 
 };
+
+export const fetchCategories = async() => {
+	const response = await axios.get(`${baseURL}/categories`);
+	return (response.data.data);
+
+}
+
+export const fetchProducts = async(catId) => {
+	const response = await axios.get(`${baseURL}/products/${catId}`);
+	return (response.data.data);
+
+}
