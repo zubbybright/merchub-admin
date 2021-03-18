@@ -4,7 +4,7 @@ const defaultState = {
 categories:[]
 }
 
-export default (state = defaultState, action) => {
+const category = (state = defaultState, action) => {
 
   switch(action.type) {
     case CATEGORIES_LOADED:
@@ -16,3 +16,4 @@ export default (state = defaultState, action) => {
         return state;
   }
 }
+export default category;
