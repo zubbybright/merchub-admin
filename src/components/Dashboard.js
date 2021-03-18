@@ -1,48 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import './css/Dashboard.css';
-import { Row, Card, Table, Col, Container, Dropdown,DropdownButton } from 'react-bootstrap';
+import { Row, Card, Table, Col, Container} from 'react-bootstrap';
 import { Bar, Pie } from 'react-chartjs-2';
-import { fetchCategories, fetchProducts} from './agents/api';
-import { categoriesFetch , productsFetched } from '../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import FetchProducts from './FetchProducts';
 
 export default function Dashboard() {
-    const dispatch = useDispatch();
     const categories = useSelector(state => state.category.categories);
-    const products = useSelector(state=> state.product.products.products);
-    const [countProducts, setCountProducts] = useState(0);
-    console.log(products);
-    const [availability, setAvailability] = useState([]);
+    const countProducts = useSelector(state=> state.product.productsCount);
+    console.log(countProducts);
+    const availability= useSelector(state=> state.product.productsAvailability);
+
     console.log(availability);
-
-    useEffect(() => {
-        async function fetchAllCategories() {
-            try {
-                let categories = await fetchCategories();
-                dispatch(categoriesFetch(categories));
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-        fetchAllCategories()
-    }, [dispatch]);
-
-    const categoryProducts = async(catId)=>{
-        try{
-           let prods = await fetchProducts(catId);
-           dispatch(productsFetched(prods));
-           setCountProducts(products.length);
-        //   
-        }
-        catch(error){
-            console.log(error);
-        }
-        setAvailability(products.map((x) => x.availability));
-    }
 
     let cateNames = categories.map((x) =>x.name); 
     
@@ -84,7 +55,7 @@ export default function Dashboard() {
                     <Header firstLink='Dashboard'
                         firstLinkHeader='/dashboard'
                         secondLink='Products Management'
-                        secondLinkHeader='/'
+                        secondLinkHeader='/products'
                         thirdLink='Profile'
                         thirdLinkHeader='/'
                     />
@@ -93,12 +64,9 @@ export default function Dashboard() {
             </Row>
             <Row>
                 <Col style={{ textAlign: 'center', marginTop: "3rem" }}>
-                    <DropdownButton id="dropdown-basic-button" title="Sort Data By Category">
-                    { categories && categories.map((x)=>
-                        <Dropdown.Item as="button" key ={x.id} onClick = {() => { categoryProducts(x.id);}}>{x.name}</Dropdown.Item>
-                    )}
-                    </DropdownButton>
+                    <FetchProducts/>
                 </Col>
+               
             </Row>
             <Row className='top-buffer'>
                 <Col>

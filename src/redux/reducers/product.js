@@ -1,7 +1,9 @@
-import { PRODUCTS_LOADED } from "../actionTypes";
+import { PRODUCTS_LOADED, PRODUCTS_COUNTED, PRODUCTS_AVAILABILITY_LOADED } from "../actionTypes";
 
 const defaultState = {
 products:[],
+productsCount: 0,
+productsAvailability : [0]
 }
 
 const product = (state = defaultState, action) => {
@@ -12,6 +14,16 @@ const product = (state = defaultState, action) => {
         ...state,
         products: action.products,
       };
+    case PRODUCTS_COUNTED:
+      return {
+        ...state,
+        productsCount: action.value
+      }
+    case PRODUCTS_AVAILABILITY_LOADED:
+      return {
+        ...state,
+        productsAvailability : action.value
+      }
     default:
         return state;
   }
