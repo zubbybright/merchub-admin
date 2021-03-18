@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import './css/Dashboard.css';
@@ -12,7 +12,8 @@ export default function Dashboard() {
     const products = useSelector(state=> state.product.products.products);
     const countProducts = useSelector(state=> state.product.products.productsCount);
     console.log(products);
-    const [availability, setAvailability] = useState([]);
+    const availability= useSelector(state=> state.product.products.productsAvailability);
+
     console.log(availability);
 
     let cateNames = categories.map((x) =>x.name); 
@@ -32,7 +33,7 @@ export default function Dashboard() {
     
 //Display of Availability Ration in Chart
     let StockCounts = {};
-    availability.forEach(function(x) { StockCounts[x] = (StockCounts[x] || 0)+1; });
+   //availability.forEach(function(x) { StockCounts[x] = (StockCounts[x] || 0)+1; });
    
     const AvailabilityRatio = {
         labels: ['In Stock', 'Out of Stock'],
