@@ -10,7 +10,7 @@ const defaultState =  {
   }
 
 
-export default (state = defaultState , action) => {
+const auth = (state = defaultState , action) => {
     switch (action.type) {
         case RESTORE_TOKEN:
             return {
@@ -34,3 +34,5 @@ export default (state = defaultState , action) => {
             return state;
     }
 }
+
+export default auth;

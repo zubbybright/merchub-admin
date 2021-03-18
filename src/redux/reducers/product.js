@@ -4,7 +4,7 @@ const defaultState = {
 products:[],
 }
 
-export default (state = defaultState, action) => {
+const product = (state = defaultState, action) => {
 
   switch(action.type) {
     case PRODUCTS_LOADED:
@@ -16,3 +16,5 @@ export default (state = defaultState, action) => {
         return state;
   }
 }
+
+export default product;

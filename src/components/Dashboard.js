@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import './css/Dashboard.css';
 import { Row, Card, Table, Col, Container, Dropdown,DropdownButton } from 'react-bootstrap';
-import { Bar, Doughnut, Pie } from 'react-chartjs-2';
-import { fetchCategories, fetchProducts } from './agents/api';
+import { Bar, Pie } from 'react-chartjs-2';
+import { fetchCategories, fetchProducts} from './agents/api';
 import { categoriesFetch , productsFetched } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,12 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Dashboard() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.category.categories);
-    const products = useSelector(state=> state.product.products);
-    console.log(products.products);
-    // console.log(categories);
-    let cateNames = categories.map((x) =>x.name);  
-    // let availability = products.map((x) => x.products);
-    // console.log(availability);
+    const products = useSelector(state=> state.product.products.products);
+    const [countProducts, setCountProducts] = useState(0);
+    console.log(products);
+    const [availability, setAvailability] = useState([]);
+    console.log(availability);
 
     useEffect(() => {
         async function fetchAllCategories() {
@@ -26,35 +25,28 @@ export default function Dashboard() {
                 dispatch(categoriesFetch(categories));
             }
             catch (error) {
-                console.log('error');
+                console.log(error);
             }
         }
         fetchAllCategories()
-    }, []);
+    }, [dispatch]);
 
     const categoryProducts = async(catId)=>{
         try{
            let prods = await fetchProducts(catId);
            dispatch(productsFetched(prods));
+           setCountProducts(products.length);
+        //   
         }
         catch(error){
-            console.log('error');
+            console.log(error);
         }
+        setAvailability(products.map((x) => x.availability));
     }
 
-    const Monthly = {
-        labels:  cateNames,
-        datasets: [
-            {
-                label: 'Categories',
-                backgroundColor: 'rgba(75,192,192,1)',
-                borderColor: 'rgba(0,0,0,1)',
-                borderWidth: 2,
-                data: [65, 59, 80, 81, 56]
-            }
-        ]
-    }
-    const Weekly = {
+    let cateNames = categories.map((x) =>x.name); 
+    
+    const CategoryList = {
         labels: cateNames,
         datasets: [
             {
@@ -66,7 +58,12 @@ export default function Dashboard() {
             }
         ]
     }
-    const SalesRatio = {
+    
+//Display of Availability Ration in Chart
+    let StockCounts = {};
+    availability.forEach(function(x) { StockCounts[x] = (StockCounts[x] || 0)+1; });
+   
+    const AvailabilityRatio = {
         labels: ['In Stock', 'Out of Stock'],
         datasets: [
             {
@@ -74,7 +71,8 @@ export default function Dashboard() {
                 backgroundColor: ['rgba(75,192,192,1)', 'pink'],
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: [80, 56]
+                data: [StockCounts.IN_STOCK?StockCounts.IN_STOCK:0, 
+                    StockCounts.SOLD_OUT ? StockCounts.SOLD_OUT:0 ]
             }
         ]
     }
@@ -105,24 +103,14 @@ export default function Dashboard() {
             <Row className='top-buffer'>
                 <Col>
 
-                    <Card >
+                    <Card text='info'>
                         <Card.Body>
-                            <div>
-                                <Bar
-                                    data={Monthly}
-                                    options={{
-                                        title: {
-                                            display: true,
-                                            text: 'Number Of Products Per Category',
-                                            fontSize: 20
-                                        },
-                                        legend: {
-                                            display: true,
-                                            position: 'right'
-                                        }
-                                    }}
-                                />
-                            </div>
+                            <Card.Title >
+                                Number of Products Of Selected Category
+                            </Card.Title>
+                            <Card.Text className= "product-number">
+                                 {countProducts} 
+                            </Card.Text>
 
                         </Card.Body>
                     </Card>
@@ -130,12 +118,12 @@ export default function Dashboard() {
                 <Col>
                     <Card >
                         <Card.Body>
-                            <Doughnut
-                                data={Weekly}
+                            <Bar
+                                data={CategoryList}
                                 options={{
                                     title: {
                                         display: true,
-                                        text: 'Available Products',
+                                        text: 'Available Categories',
                                         fontSize: 20
                                     },
                                     legend: {
@@ -150,10 +138,9 @@ export default function Dashboard() {
                 <Col>
                     <Card >
                         <Card.Body>
-                            <Card.Title>Orders Ratio</Card.Title>
                             <div>
                                 <Pie
-                                    data={SalesRatio}
+                                    data={AvailabilityRatio}
                                     options={{
                                         title: {
                                             display: true,

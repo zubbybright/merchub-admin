@@ -5,7 +5,7 @@ const defaultState = {
   isBtnDisabled: true
 }
 
-export default (state = defaultState, action) => {
+const common = (state = defaultState, action) => {
 
   switch(action.type) {
     case IS_LOADING:
@@ -22,3 +22,5 @@ export default (state = defaultState, action) => {
         return state;
   }
 }
+
+export default common;
