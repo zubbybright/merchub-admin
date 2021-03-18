@@ -9,10 +9,9 @@ import FetchProducts from './FetchProducts';
 
 export default function Dashboard() {
     const categories = useSelector(state => state.category.categories);
-    const products = useSelector(state=> state.product.products.products);
-    const countProducts = useSelector(state=> state.product.products.productsCount);
-    console.log(products);
-    const availability= useSelector(state=> state.product.products.productsAvailability);
+    const countProducts = useSelector(state=> state.product.productsCount);
+    console.log(countProducts);
+    const availability= useSelector(state=> state.product.productsAvailability);
 
     console.log(availability);
 
@@ -33,7 +32,7 @@ export default function Dashboard() {
     
 //Display of Availability Ration in Chart
     let StockCounts = {};
-   //availability.forEach(function(x) { StockCounts[x] = (StockCounts[x] || 0)+1; });
+    availability.forEach(function(x) { StockCounts[x] = (StockCounts[x] || 0)+1; });
    
     const AvailabilityRatio = {
         labels: ['In Stock', 'Out of Stock'],
@@ -65,11 +64,6 @@ export default function Dashboard() {
             </Row>
             <Row>
                 <Col style={{ textAlign: 'center', marginTop: "3rem" }}>
-                    {/* <DropdownButton id="dropdown-basic-button" title="Sort Data By Category">
-                    { categories && categories.map((x)=>
-                        <Dropdown.Item as="button" value = {x.name} key ={x.id} onClick = {() => { categoryProducts(x.id);}}>{x.name}</Dropdown.Item>
-                    )}
-                    </DropdownButton> */}
                     <FetchProducts/>
                 </Col>
                
