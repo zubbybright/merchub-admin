@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import './css/Dashboard.css';
 import { Row, Card, Table, Col, Container} from 'react-bootstrap';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import FetchProducts from './FetchProducts';
 
@@ -16,6 +16,7 @@ export default function Dashboard() {
 
     console.log(availability);
     console.log(selectedCategory);
+    console.log(categories);
 
     //TO DO:
     //count the number of products that are in stock for each category.
@@ -117,9 +118,8 @@ export default function Dashboard() {
                                         <tr key={x}>
                                             <td key={x.id}>{x.id}</td>
                                             <td key={x.name}>{x.name}</td>
-                                           
-                                            <td >{StockCounts.IN_STOCK}</td>
-                                            <td >{StockCounts.SOLD_OUT}</td>
+                                            <td >{x.in_stock_count}</td>
+                                            <td >{x.sold_out_count}</td>
                                            
                                         </tr>
                                     </tbody>
