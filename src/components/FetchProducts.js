@@ -1,7 +1,7 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { useDispatch,useSelector } from "react-redux";
 import {  fetchProducts} from './agents/api';
-import { productsCounted, productsFetched, productsAvailabilityLoaded } from '../redux/actions';
+import { productsCounted, productsFetched, productsAvailabilityLoaded, valueSelected } from '../redux/actions';
 import { Row,  Col, Dropdown,DropdownButton } from 'react-bootstrap';
 
 
@@ -25,16 +25,21 @@ export default function FetchProducts() {
             console.log(error);
         }
     }
+    const handleSelect=(e)=>{
+        console.log(e);
+        dispatch(valueSelected(e));
+    }
 
     return (
         <Row>
             <Col style={{ textAlign: 'center', marginTop: "3rem" }}>
-                <DropdownButton id="dropdown-basic-button" title="Sort Data By Category">
+                <DropdownButton id="dropdown-basic-button" onSelect={handleSelect} title="Sort Data By Category">
                     {categories && categories.map((x) =>
-                        <Dropdown.Item as="button" value={x.name} key={x.id} onClick={() => { categoryProducts(x.id); }}>{x.name}</Dropdown.Item>
+                        <Dropdown.Item as="button" eventKey={x.name} value={x.name} key={x.id} onClick={() => { categoryProducts(x.id); }}>{x.name}</Dropdown.Item>
                     )}
                 </DropdownButton>
             </Col>
+            
         </Row> 
     )
     

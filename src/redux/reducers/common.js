@@ -1,8 +1,9 @@
-import { IS_LOADING, IS_BTN_DISABLED  } from "../actionTypes";
+import { IS_LOADING, IS_BTN_DISABLED, VALUE_SELECTED  } from "../actionTypes";
 
 const defaultState = {
   isLoading: false,
-  isBtnDisabled: true
+  isBtnDisabled: true,
+  selectedValue: ''
 }
 
 const common = (state = defaultState, action) => {
@@ -18,6 +19,11 @@ const common = (state = defaultState, action) => {
         ...state,
         isBtnDisabled: action.isBtnDisabled,
       };
+      case VALUE_SELECTED:
+        return {
+          ...state,
+          selectedValue: action.value,
+        };
     default:
         return state;
   }

@@ -12,23 +12,13 @@ export default function Dashboard() {
     const countProducts = useSelector(state=> state.product.productsCount);
     console.log(countProducts);
     const availability= useSelector(state=> state.product.productsAvailability);
+    const selectedCategory = useSelector(state => state.common.selectedValue);
 
     console.log(availability);
+    console.log(selectedCategory);
 
-    let cateNames = categories.map((x) =>x.name); 
-    
-    const CategoryList = {
-        labels: cateNames,
-        datasets: [
-            {
-                label: 'Categories',
-                backgroundColor: ['rgba(75,192,192,1)', 'green', 'gray','pink', 'navy', 'orange', 'red', 'yellow', 'purple',],
-                borderColor: 'rgba(0,0,0,1)',
-                borderWidth: 2,
-                data: [65, 59, 80, 81, 56, 80, 20,90,45,70]
-            }
-        ]
-    }
+    //TO DO:
+    //count the number of products that are in stock for each category.
     
 //Display of Availability Ration in Chart
     let StockCounts = {};
@@ -74,32 +64,12 @@ export default function Dashboard() {
                     <Card text='info'>
                         <Card.Body>
                             <Card.Title >
-                                Number of Products Of Selected Category
+                                Selected Category :
                             </Card.Title>
-                            <Card.Text className= "product-number">
-                                 {countProducts} 
+                            <Card.Text className= "selected-category">
+                                 {selectedCategory} 
                             </Card.Text>
 
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card >
-                        <Card.Body>
-                            <Bar
-                                data={CategoryList}
-                                options={{
-                                    title: {
-                                        display: true,
-                                        text: 'Available Categories',
-                                        fontSize: 20
-                                    },
-                                    legend: {
-                                        display: true,
-                                        position: 'right'
-                                    }
-                                }}
-                            />
                         </Card.Body>
                     </Card>
                 </Col>
@@ -142,14 +112,18 @@ export default function Dashboard() {
                                     </tr>
                                 </thead>
                                 {categories && categories.map((x, i) =>
+                                
                                     <tbody key={i}>
                                         <tr key={x}>
                                             <td key={x.id}>{x.id}</td>
                                             <td key={x.name}>{x.name}</td>
-                                            <td >12</td>
-                                            <td >24</td>
+                                           
+                                            <td >{StockCounts.IN_STOCK}</td>
+                                            <td >{StockCounts.SOLD_OUT}</td>
+                                           
                                         </tr>
                                     </tbody>
+                                     
                                 )}
                             </Table>
                         </Card.Body>
