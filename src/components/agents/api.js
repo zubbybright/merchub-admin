@@ -28,3 +28,14 @@ export const fetchProducts = async(catId) => {
 	return (response.data.data);
 
 }
+
+export const deleteProduct = async(id) => {
+	const response = await axios.post(`${baseURL}/product/delete/${id}`);
+	return (response.data.data);
+
+}
+export const getProductById = async(id) => {
+	const response = await axios.t(`${baseURL}/product/${id}`);
+	return (response.data.data);
+
+}

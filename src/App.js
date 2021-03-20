@@ -13,6 +13,7 @@ import ProductManagement from './components/ProductManagement';
 import { fetchCategories} from './components/agents/api';
 import { categoriesFetch } from './redux/actions';
 import { useDispatch } from 'react-redux';
+import ViewProduct from './components/ViewProduct';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
       <NotLoggedInRoute path="/" exact Component={Login} />
       <LoggedInRoute path="/dashboard" Component={Dashboard} />
       <LoggedInRoute path="/products" Component={ProductManagement} />
+      <LoggedInRoute path="/:id" Component={ViewProduct} />
       </Switch>
     </Router>
   );

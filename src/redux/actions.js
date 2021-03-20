@@ -1,6 +1,7 @@
 import {LOGIN , IS_LOADING, IS_BTN_DISABLED,
     CATEGORIES_LOADED, PRODUCTS_LOADED, PRODUCTS_COUNTED,
-    PRODUCTS_AVAILABILITY_LOADED, VALUE_SELECTED} from "./actionTypes";
+    PRODUCTS_AVAILABILITY_LOADED, VALUE_SELECTED, SPECIFIC_PRODUCT_FETCHED
+} from "./actionTypes";
 
 
 export const login = (access_token, username,first_name, last_name,role) => ({
@@ -44,5 +45,10 @@ export const productsAvailabilityLoaded = (value)=>({
 
 export const valueSelected = (value)=>({
     type : VALUE_SELECTED,
+    value
+})
+
+export const productFetchedById = (value)=>({
+    type : SPECIFIC_PRODUCT_FETCHED,
     value
 })
