@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React , {useEffect, useState} from 'react';
 // import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Table, Button} from 'react-bootstrap';
@@ -11,16 +11,17 @@ import { productFetchedById } from '../redux/actions';
 export default function ViewProduct() {
     const { prodId } = useParams();
     const dispatch = useDispatch();
-    const product = useSelector(state=> state.product.specificProduct);
-    // console.log(prodId);
-    console.log(product);
+    const [specificProduct, setSpecificProduct] = useState({"product":{},
+    "detail":{}});
+    console.log(prodId);
 
+    dispatch(productFetchedById(specificProduct));
     useEffect(() => {
         async function fetchProductById() {
             try {
                 let response = await getProductById(4);
-                dispatch(productFetchedById(response));
                console.log(response);
+               setSpecificProduct(response)
             }
             catch (error) {
                 console.log(error);
@@ -60,20 +61,22 @@ export default function ViewProduct() {
                                 </tr>
                             </thead>
                             <tbody>
+                                {specificProduct &&
                                 <tr>
-                                    <td>{product.product.id}</td>
-                                    <td>{product.product.name}</td>
-                                    <td>{product.product.price}</td>
-                                    <td>{product.product.availability}</td>
-                                    <td>{product.detail.description}</td>
-                                    <td>{product.detail.manufacturer}</td>
-                                    <td>{product.detail.expiry_date}</td>
-                                    <td>{product.detail.nafdac_reg_no}</td>
+                                    <td>{specificProduct.product.id}</td>
+                                    <td>{specificProduct.product.name}</td>
+                                    <td>{specificProduct.product.price}</td>
+                                    <td>{specificProduct.product.availability}</td>
+                                    <td>{specificProduct.detail.description}</td>
+                                    <td>{specificProduct.detail.manufacturer}</td>
+                                    <td>{specificProduct.detail.expiry_date}</td>
+                                    <td>{specificProduct.detail.nafdac_reg_no}</td>
                                     <td>
                                     <Button variant='info' className='mr-1' href='#'>Edit</Button>
                                     <Button variant='danger' className='mr-1' href='#'>Delete</Button>
                                     </td>
                                 </tr>
+                                }
                             </tbody>
                         </Table>
                     </Card>

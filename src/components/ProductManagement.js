@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { Row, Card, Table, Col, Container, Modal, Dropdown, DropdownButton,Alert, Button } from 'react-bootstrap';
+import { Row, Card, Table, Col, Container, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import FetchProducts from './FetchProducts';
-import { deleteProduct } from './agents/api';
+// import { deleteProduct } from './agents/api';
 
 export default function ProductManagement() {
     // const categories = useSelector(state => state.category.categories);
-    const products = useSelector(state => state.product.products.products);
+    const products = useSelector(state => state.product.products);
     const selectedCategory = useSelector(state => state.common.selectedValue);
 
     // const [show, setShow] = useState(false);
 
-    console.log(products);
-
-    const productDelete = async (id) => {
-        try {
-            await deleteProduct(id);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
+    // console.log(products);
+    console.log(selectedCategory);
+    // const productDelete = async (id) => {
+    //     try {
+    //         await deleteProduct(id);
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     return (
         <Container fluid>
@@ -76,7 +76,7 @@ export default function ProductManagement() {
                                     </tr>
                                 </tbody>
                             }
-                            {products && products.map((x, i) =>
+                            {products.products && products.products.map((x, i) =>
                                 <tbody key={i}>
                                     <tr key={x}>
                                         <td>{x.id}</td>

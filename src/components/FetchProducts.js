@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { useState }  from 'react';
 import { useDispatch,useSelector } from "react-redux";
 import {  fetchProducts} from './agents/api';
 import { productsCounted, productsFetched, productsAvailabilityLoaded, valueSelected } from '../redux/actions';
@@ -8,20 +8,25 @@ import { Row,  Col, Dropdown,DropdownButton } from 'react-bootstrap';
 export default function FetchProducts() {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.category.categories);
-    let products = useSelector(state=> state.product.products.products);
-
-    useEffect(()=>{
-        if (products === undefined){
-            products = []
-        }
-    });
+    const products = useSelector(state=> state.product.products);
+    const [prodsByCategory , setProdsByCategory] = useState({"products":[],
+    "detail":[], "images":[]});
+    console.log(products);
+  
+    // useEffect(()=>{
+    //     if (products === undefined){
+    //         products = []
+    //     }
+    // });
 
     const categoryProducts = async (catId) => {
         try {
             let prods = await fetchProducts(catId);
-            dispatch(productsFetched(prods));
-            dispatch(productsCounted(products.length));
-            let stockState = products.map((x) => x.availability);
+            setProdsByCategory(prods);
+            dispatch(productsFetched(prodsByCategory));
+            console.log(prodsByCategory.products.length);
+            dispatch(productsCounted(prodsByCategory.products.length));
+            let stockState = prodsByCategory.products.map((x) => x.availability);
 
             dispatch(productsAvailabilityLoaded(stockState));
             // console.log(stockState);
@@ -44,8 +49,7 @@ export default function FetchProducts() {
                         <Dropdown.Item as="button" eventKey={x.name} value={x.name} key={x.id} onClick={() => { categoryProducts(x.id); }}>{x.name}</Dropdown.Item>
                     )}
                 </DropdownButton>
-            </Col>
-            
+            </Col>        
         </Row> 
     )
     

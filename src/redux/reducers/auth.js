@@ -16,8 +16,9 @@ const auth = (state = defaultState , action) => {
             return {
               ...state,
               userToken: action.token,
-        }
-        case LOGIN: {
+            
+            }
+        case LOGIN: 
             return {
                 ...state,
                 userToken: action.access_token,
@@ -27,7 +28,7 @@ const auth = (state = defaultState , action) => {
                 role: action.role,
                 isSignedout:false
             }
-        }
+        
         case LOGOUT:
             return defaultState
         default:

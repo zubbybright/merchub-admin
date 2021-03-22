@@ -5,4 +5,4 @@ import common from "./common";
 import category from "./category";
 
 
-export default combineReducers({ auth, product ,common, category});
+export default combineReducers({auth, product ,common, category});
