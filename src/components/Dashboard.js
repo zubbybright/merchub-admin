@@ -5,7 +5,7 @@ import './css/Dashboard.css';
 import { Row, Card, Table, Col, Container} from 'react-bootstrap';
 import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import FetchProducts from './FetchProducts';
+import FetchProducts from './ProductManager/FetchProducts';
 
 export default function Dashboard() {
     const categories = useSelector(state => state.category.categories);

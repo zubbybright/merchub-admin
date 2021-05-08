@@ -9,11 +9,12 @@ import {
 } from "react-router-dom";
 import NotLoggedInRoute from './containers/NotLoggedInRoute';
 import LoggedInRoute from './containers/LoggedInRoute';
-import ProductManagement from './components/ProductManagement';
+import ProductManagement from './components/ProductManager/ProductManagement';
 import { fetchCategories} from './components/agents/api';
 import { categoriesFetch } from './redux/actions';
 import { useDispatch } from 'react-redux';
-import ViewProduct from './components/ViewProduct';
+import ViewProduct from './components/ProductManager/ViewProduct';
+import UploadProduct from './components/ProductManager/UploadProduct';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       <NotLoggedInRoute path="/" exact Component={Login} />
       <LoggedInRoute path="/dashboard" Component={Dashboard} />
       <LoggedInRoute path="/products" Component={ProductManagement} />
+      <LoggedInRoute path="/upload" Component={UploadProduct} />
       <LoggedInRoute path="/:id" Component={ViewProduct} />
       </Switch>
     </Router>

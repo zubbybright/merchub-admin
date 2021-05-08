@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../Header';
+import Footer from '../Footer';
 import { Row, Card, Table, Col, Container, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import FetchProducts from './FetchProducts';
-// import { deleteProduct } from './agents/api';
+import { Link } from 'react-router-dom'
 
 export default function ProductManagement() {
     // const categories = useSelector(state => state.category.categories);
@@ -28,21 +28,14 @@ export default function ProductManagement() {
         <Container fluid>
             <Row>
                 <Col>
-                    <Header
-                        firstLink='Dashboard'
-                        firstLinkHeader='/dashboard'
-                        secondLink='Product Management'
-                        secondLinkHeader='/'
-                        thirdLink='Profile'
-                        thirdLinkHeader='/'
-                    />
+                    <Header/>
                 </Col>
             </Row>
             <Row className='pb-4 ml-2 mr-3 sub-panel'>
                 <Col >
                     <FetchProducts />
                 </Col>
-                <Col style={{ textAlign: 'center', marginTop: "2rem" }}><Button href="#">Upload A Product</Button>  </Col>
+                <Col style={{ textAlign: 'center', marginTop: "2rem" }}><Link className='bg-primary text-white p-2 ' to="/upload">Upload A Product</Link>  </Col>
             </Row>
             <Row className='top-buffer'>
                 <Col>
@@ -84,7 +77,7 @@ export default function ProductManagement() {
                                         <td>{x.price}</td>
                                         <td>{x.availability}</td>
                                         <td>
-                                        <Button variant='info' className='mr-1' href={'/'+x.id}>View</Button>
+                                        <Link  className='mr-1' to={'/'+x.id}>View</Link>
                                            
                                         </td>
                                     </tr>

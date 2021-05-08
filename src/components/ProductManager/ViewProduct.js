@@ -2,10 +2,10 @@ import React , {useEffect, useState} from 'react';
 // import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Table, Button} from 'react-bootstrap';
-import Header from './Header';
-import {getProductById} from './agents/api';
-import { useDispatch, useSelector } from 'react-redux';
-import { productFetchedById } from '../redux/actions';
+import Header from '../Header';
+import {getProductById} from '../agents/api';
+import { useDispatch } from 'react-redux';
+import { productFetchedById } from '../../redux/actions';
 
 
 export default function ViewProduct() {
