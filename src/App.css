@@ -1,7 +1,9 @@
 .top-buffer{
   margin-top: 5rem;
 }
-
+.logo{
+  width: 10rem;
+}
 .sub-panel {
   background-color: rgb(175, 174, 174);
 }

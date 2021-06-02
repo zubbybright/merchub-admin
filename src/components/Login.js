@@ -43,8 +43,8 @@ export default function Login(){
         (userName.length === 0 || password.length === 0) ?dispatch(isBtnDisabled(true)): dispatch(isBtnDisabled(false))
     },[userName, password, dispatch]);
     return (
-        <div >
-            <img className="logo" src="./logo.png" alt="logo"></img>
+        <div className='login-body bg-light'>
+            <img className="logo" src="./logo1.png" alt="logo"></img>
             <div className="form-and-message">
                 <div className="message">Welcome Admin</div>
                 <div>

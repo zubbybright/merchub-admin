@@ -1,12 +1,13 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
 }
 
-.logo{
-   width: 10rem;
-   height: 10rem;
+.login-body{
+    padding: 1rem;
+}
+.login-body .logo{
+    width :8rem;
 }
 .form-and-message{
     margin-top: 2rem;
