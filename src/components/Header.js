@@ -7,11 +7,11 @@ export default function Header() {
 
     return (
         <Container fluid>
-            <Row>
+            <Row className='wrapper'>
                 <Col>
-                    <Navbar className = 'justify-content-center' bg="light" expand="lg">
+                    <Navbar className = 'justify-content-center'>
                         <Col>
-                            <Navbar.Brand href="/dashboard"> <img className="logo" src="./logo1.png" alt="logo"></img></Navbar.Brand>
+                            <Navbar.Brand href="/dashboard"> <img className="header-logo" src="./logo.png" alt="logo"></img></Navbar.Brand>
                         </Col>
 
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

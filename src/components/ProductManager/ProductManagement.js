@@ -25,13 +25,13 @@ export default function ProductManagement() {
     // }
 
     return (
-        <Container fluid>
+        <Container fluid className='App-body'>
             <Row>
                 <Col>
                     <Header/>
                 </Col>
             </Row>
-            <Row className='pb-4 ml-2 mr-3 sub-panel'>
+            <Row className='pb-4 ml-2 mr-3'>
                 <Col >
                     <FetchProducts />
                 </Col>

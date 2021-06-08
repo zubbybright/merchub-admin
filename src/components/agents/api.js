@@ -39,13 +39,10 @@ export const getProductById = async(id) => {
 	return (response.data.data);
 
 }
-export const uploadProduct = async(productName,category,price,description,
-	manufacturer,nafdac,expiry,image1,image2,image3)=>{
-		const response = await axios.post(`${baseURL}/product/upload`, {
-			'name':productName,
-			'nafdac_no':nafdac,
-			price,category,description,manufacturer,
-			expiry,image1,image2,image3
+export const uploadProduct = async(formData)=>{
+	
+	const response = await axios.post(`${baseURL}/product/upload`, {
+			formData
 		});
 		return (response.data.data);
 	}

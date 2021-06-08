@@ -1,10 +1,11 @@
-body {
+/* body {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .login-body{
     padding: 1rem;
+    background-color: peachpuff;
 }
 .login-body .logo{
     width :8rem;
@@ -21,7 +22,7 @@ body {
     margin-top: 70px;
 }
 .form-and-message .form{
-    background-color: rgb(0, 174, 255);
+    background-color: rgb(3, 151, 170);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     display: flex;

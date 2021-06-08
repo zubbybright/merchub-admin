@@ -40,7 +40,7 @@ export default function Dashboard() {
     }
 
     return (
-        <Container fluid>
+        <Container fluid className="App-body">
             <Row>
                 <Col>
                     <Header firstLink='Dashboard'

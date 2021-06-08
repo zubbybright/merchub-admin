@@ -46,7 +46,7 @@ export default function FetchProducts() {
             <Col style={{ textAlign: 'center', marginTop: "2rem" }}>
                 <DropdownButton id="dropdown-basic-button" onSelect={handleSelect} title="Sort Data By Category">
                     {categories && categories.map((x) =>
-                        <Dropdown.Item as="button" eventKey={x.name} value={x.name} key={x.id} onClick={() => { categoryProducts(x.id); }}>{x.name}</Dropdown.Item>
+                        <Dropdown.Item  as="button" eventKey={x.name} value={x.name} key={x.id} onClick={() => { categoryProducts(x.id); }}>{x.name}</Dropdown.Item>
                     )}
                 </DropdownButton>
             </Col>        
