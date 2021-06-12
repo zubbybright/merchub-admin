@@ -11,7 +11,7 @@ export default function Header() {
                 <Col>
                     <Navbar className = 'justify-content-center'>
                         <Col>
-                            <Navbar.Brand href="/dashboard"> <img className="header-logo" src="./logo.png" alt="logo"></img></Navbar.Brand>
+                            <Navbar.Brand href="/dashboard"> <img className="header-logo" src="/images/logo.png" alt="logo"></img></Navbar.Brand>
                         </Col>
 
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

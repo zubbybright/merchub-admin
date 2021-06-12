@@ -19,7 +19,7 @@ export default function ViewProduct() {
     useEffect(() => {
         async function fetchProductById() {
             try {
-                let response = await getProductById(4);
+                let response = await getProductById(prodId);
                console.log(response);
                setSpecificProduct(response)
             }
@@ -28,7 +28,7 @@ export default function ViewProduct() {
             }
         }
         fetchProductById()
-      }, [dispatch]);
+      }, [dispatch, prodId]);
 
     return (
         <Container fluid>

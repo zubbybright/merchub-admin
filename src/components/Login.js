@@ -29,8 +29,11 @@ export default function Login(){
             console.log('logging');
             const {access_token, username,first_name, last_name,role} = await adminLogin(userName,password);
             dispatch(login(access_token,username,first_name, last_name,role));
+            // console.log('setting token')
             localStorage.setItem('token', auth.userToken);
+            // console.log('pushing to dashboard')
             history.push('/dashboard');
+           
         }
         catch(error){
             if(error.response.data.message)
@@ -44,7 +47,7 @@ export default function Login(){
     },[userName, password, dispatch]);
     return (
         <div className='App-body'>
-            <img className="logo" src="./logo.png" alt="logo"></img>
+            <img className="logo" src="/images/logo.png" alt="logo"></img>
             <div className="form-and-message">
                 <div className="message">Welcome Admin</div>
                 <div>

@@ -1,16 +1,16 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch,Route
 } from "react-router-dom";
-import NotLoggedInRoute from './containers/NotLoggedInRoute';
+
 import LoggedInRoute from './containers/LoggedInRoute';
 import ProductManagement from './components/ProductManager/ProductManagement';
-import { fetchCategories} from './components/agents/api';
+import { fetchCategories } from './components/agents/api';
 import { categoriesFetch } from './redux/actions';
 import { useDispatch } from 'react-redux';
 import ViewProduct from './components/ProductManager/ViewProduct';
@@ -21,24 +21,24 @@ function App() {
 
   useEffect(() => {
     async function fetchAllCategories() {
-        try {
-            let categories = await fetchCategories();
-            dispatch(categoriesFetch(categories));
-        }
-        catch (error) {
-            console.log(error);
-        }
+      try {
+        let categories = await fetchCategories();
+        dispatch(categoriesFetch(categories));
+      }
+      catch (error) {
+        console.log(error);
+      }
     }
     fetchAllCategories()
   }, [dispatch]);
   return (
     <Router>
       <Switch>
-      <NotLoggedInRoute path="/" exact Component={Login} />
-      <LoggedInRoute path="/dashboard" Component={Dashboard} />
-      <LoggedInRoute path="/products" Component={ProductManagement} />
-      <LoggedInRoute path="/upload" Component={UploadProduct} />
-      <LoggedInRoute path="/:id" Component={ViewProduct} />
+        <Route path="/" exact component={Login} />
+        <LoggedInRoute path="/dashboard" component={Dashboard} />
+        <LoggedInRoute path="/products" component={ProductManagement} />
+        <LoggedInRoute path="/upload" component={UploadProduct} />
+        <LoggedInRoute path="/product/:prodId" component={ViewProduct} />
       </Switch>
     </Router>
   );

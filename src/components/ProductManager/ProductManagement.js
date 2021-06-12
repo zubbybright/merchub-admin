@@ -77,7 +77,7 @@ export default function ProductManagement() {
                                         <td>{x.price}</td>
                                         <td>{x.availability}</td>
                                         <td>
-                                        <Link  className='mr-1' to={'/'+x.id}>View</Link>
+                                        <Link  className='mr-1' to={'/product/'+x.id}>View</Link>
                                            
                                         </td>
                                     </tr>
