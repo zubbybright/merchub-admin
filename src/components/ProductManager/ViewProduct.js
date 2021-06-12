@@ -3,6 +3,7 @@ import React , {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Table, Button} from 'react-bootstrap';
 import Header from '../Header';
+import Footer from '../Footer';
 import {getProductById} from '../agents/api';
 import { useDispatch } from 'react-redux';
 import { productFetchedById } from '../../redux/actions';
@@ -81,6 +82,9 @@ export default function ViewProduct() {
                         </Table>
                     </Card>
                 </Col>
+            </Row>
+            <Row>
+                <Col><Footer /></Col>
             </Row>
         </Container>
 
