@@ -39,13 +39,11 @@ export const getProductById = async(id) => {
 	return (response.data.data);
 
 }
-export const uploadProduct = async(productName,category,manufacturer,price,description,expiry,nafdac,image1)=>{
-	console.log(image1);
-	const response = await axios.post(`${baseURL}/product/upload`, {
-		'name':productName,image1,category,manufacturer,price,
-		'nafdac_no': nafdac,
-		description,expiry,
-		});
-		console.log(image1);
+export const uploadProduct = async(data)=>{
+	const config = {
+		headers: { 'content-type': 'multipart/form-data' }
+	   }
+	const response = await axios.post(`${baseURL}/product/upload`, data, config);
+		// console.log(image1);
 		return (response.data.data);
 	}

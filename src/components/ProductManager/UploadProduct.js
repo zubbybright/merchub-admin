@@ -1,67 +1,85 @@
-import React, { useState , useRef} from 'react';
+import React, { useState } from 'react';
 // import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import Header from '../Header';
 import Footer from '../Footer';
 import '../css/UploadProduct.css';
 import { uploadProduct } from '../agents/api';
-import FileUploader from '../FileUploader';
 
 export default function UploadProduct() {
-    const [productName, setProductName] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
-    const [nafdac, setNafdac] = useState('');
-    const [manufacturer, setManufacturer] = useState('');
-    const [expiry, setExpiry] = useState('');
-    const [image1, setImage1] = useState(null);
-    const [image2, setImage2] = useState('');
-    const [image3, setImage3] = useState('');
 
-    console.log(image1);
+    const initialValues = {
+        productName: "",
+        category: "",
+        price: "",
+        description: "",
+        nafdac: "",
+        manufacturer:"",
+        expiry:"",
+    };
 
-    const onChangeProductName = (evt) => {
-        setProductName(evt.target.value);
+    const initialImages ={
+        image1:null,
+        image2:null,
+        image3:null
     }
+    const [values, setValues] = useState(initialValues);
+    const [images, setImages] = useState(initialImages);
+    // const [image2, setImage2] = useState(null);
+    // const [image3, setImage3] = useState(null);
 
-    const onChangeCategory = (evt) => {
-        setCategory(evt.target.value);
-    }
-    const onChangeDescription = (evt) => {
-        setDescription(evt.target.value);
-    }
-    const onChangePrice = (evt) => {
-        setPrice(evt.target.value);
-    }
-    const onChangeManufacturer = (evt) => {
-        setManufacturer(evt.target.value);
-    }
-    const onChangeNafdac = (evt) => {
-        setNafdac(evt.target.value);
-    }
-    const onChangeExpiry = (evt) => {
-        setExpiry(evt.target.value);
-    }
-    const image1handler = (evt) => {
-        setImage1(evt.target.files[0]);
+    // console.log(image2);
+
+    const onChangeField = (event) =>{
+        const { name, value } = event.target;
+
+        setValues({
+          ...values,
+          [name]: value,
+        });
         
     }
-    const image2handler = (evt) => {
-        setImage2(evt.target.files[1]);
-    }
-    const image3handler = (evt) => {
-        setImage3(evt.target.files[2]);
+
+    const onChangeImage  = (event) => {
+        const {name, files} = event.target
+        setImages({
+            ...images,
+            [name]:files[0]
+        })
     }
 
+    // const image1handler = (evt) => {
+    //     setImage1(evt.target.files[0]); 
+    // }
+    // const image2handler = (evt) => {
+    //     setImage2(evt.target.files[0]);
+    // }
+    // const image3handler = (evt) => {
+    //     setImage3(evt.target.files[0]);
+    // }
+
     const upload = async () => {
-        // const data = new FormData()
-        // data.append('file', image1);
-        // console.log(image1);
+        const data = new FormData()
+        data.append('image1', images.image1);
+
+        if(images.image2 != null) {
+            data.append('image2', images.image2);
+        }
+        if(images.image3 != null) {
+            data.append('image3', images.image3);
+        }
+        
+        data.append('name', values.productName);
+        data.append('category', values.category);
+        data.append('manufacturer', values.manufacturer);
+        data.append('price',values.price);
+        data.append('description',values.description);
+        data.append('expiry', values.expiry);
+        data.append('nafdac_no',values.nafdac);
+        
         try {
             console.log('uploading');
-            await uploadProduct(productName,category,manufacturer,price,
-                description,expiry,nafdac,image1);
+            await uploadProduct(data);
             console.log('uploaded');
         }
         catch (error) {
@@ -85,40 +103,41 @@ export default function UploadProduct() {
                                 <label>
                                     Product Name
                                     </label>
-                                <input type="text" placeholder="Product name" value={productName} onChange={onChangeProductName} />
+                                <input type="text" name= 'productName' placeholder="Product name" value={values.productName} onChange={onChangeField} />
                                 <label>
                                     Category
                                     </label>
-                                <input type="text" placeholder="Product category" value={category} onChange={onChangeCategory} />
+                                <input type="text" name= 'category' placeholder="Product category" value={values.category} onChange={onChangeField} />
                                 <label>
                                     Description
                                     </label>
-                                <input type="text" placeholder="Product description" value={description} onChange={onChangeDescription} />
+                                <input type="text" name= 'description' placeholder="Product description" value={values.description} onChange={onChangeField} />
                                 <label>
-                                    Price
+                                   
+                                    Product Price
                                     </label>
-                                <input type="text" placeholder="Product Price" value={price} onChange={onChangePrice} />
+                                <input type="text" name= 'price' placeholder="Product Price" value={values.price} onChange={onChangeField} />
                                 <label>
                                     Manufacturer
                                     </label>
-                                <input type="text" placeholder="Product Manufacturer" value={manufacturer} onChange={onChangeManufacturer} />
+                                <input type="text" name= 'manufacturer' placeholder="Product Manufacturer" value={values.manufacturer} onChange={onChangeField} />
                                 <label>
                                     Nafdac Reg No
                                     </label>
-                                <input type="text" placeholder="Nafdac No" value={nafdac} onChange={onChangeNafdac} />
+                                <input type="text" name= 'nafdac' placeholder="Nafdac No" value={values.nafdac} onChange={onChangeField} />
                                 <label>
                                     Expiry Date
                                     </label>
-                                <input type="text" placeholder="Expiry" value={expiry} onChange={onChangeExpiry} />
+                                <input type="text" name= 'expiry' placeholder="dd-mm-yy" value={values.expiry} onChange={onChangeField} />
                                 <label>
-                                    Primary Image
+                                    Primary Image (Required)
                                     </label>
-                                <input type="file" onChange={image1handler} />
+                                <input type="file" name='image1' onChange={onChangeImage} required />
                                 <label>
-                                    Other Images
+                                    Other Images(Optional)
                                     </label>
-                                <input type="file" value={image2} onChange={image2handler} />
-                                <input type="file" value={image3} onChange={image3handler} />
+                                <input type="file" name='image2' onChange={onChangeImage} />
+                                <input type="file" name='image3' onChange={onChangeImage} />
                                 < button type='button' onClick={upload}>
                                     Upload
                                 </button>
