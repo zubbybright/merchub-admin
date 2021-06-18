@@ -1,10 +1,10 @@
 import React , {useEffect, useState} from 'react';
 // import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Table, Button} from 'react-bootstrap';
+import { useParams, Link } from "react-router-dom";
+import { Container, Row, Col, Card, Table} from 'react-bootstrap';
 import Header from '../Header';
 import Footer from '../Footer';
-import {getProductById} from '../agents/api';
+import {deleteProduct, getProductById} from '../agents/api';
 import { useDispatch } from 'react-redux';
 import { productFetchedById } from '../../redux/actions';
 
@@ -14,7 +14,7 @@ export default function ViewProduct() {
     const dispatch = useDispatch();
     const [specificProduct, setSpecificProduct] = useState({"product":{},
     "detail":{}});
-    console.log(prodId);
+    const [deleted, setDeleted] = useState(false);
 
     dispatch(productFetchedById(specificProduct));
     useEffect(() => {
@@ -30,6 +30,18 @@ export default function ViewProduct() {
         }
         fetchProductById()
       }, [dispatch, prodId]);
+
+      const productDelete = async ()=>{
+        try{
+            await deleteProduct(prodId);
+            alert('Product Deleted');
+            // window.location.reload();
+        }
+        catch(e){
+            console.log(e);
+        }
+        setDeleted(true);
+      }
 
     return (
         <Container fluid>
@@ -61,10 +73,12 @@ export default function ViewProduct() {
                                     <th>Nafdac No</th>
                                 </tr>
                             </thead>
+                            {!deleted ?
                             <tbody>
-                                {specificProduct &&
+                                {specificProduct && 
                                 <tr>
-                                    <td>{specificProduct.product.id}</td>
+                                   
+                                    <td>{specificProduct.product.id }</td>
                                     <td>{specificProduct.product.name}</td>
                                     <td>{specificProduct.product.price}</td>
                                     <td>{specificProduct.product.availability}</td>
@@ -73,12 +87,31 @@ export default function ViewProduct() {
                                     <td>{specificProduct.detail.expiry_date}</td>
                                     <td>{specificProduct.detail.nafdac_reg_no}</td>
                                     <td>
-                                    <Button variant='info' className='mr-1' href='#'>Edit</Button>
-                                    <Button variant='danger' className='mr-1' href='#'>Delete</Button>
+                                  
+                                    <Link className='mr-1'  style={{'fontWeight':'bold'}} to={'/edit/'+prodId}>Edit|</Link>
+                                    <Link className='mr-1' style={{ 'fontWeight':'bold','color':'red'}} onClick={productDelete}>|Delete</Link>
                                     </td>
                                 </tr>
-                                }
+                                }    
                             </tbody>
+                            :
+                            <tbody>
+                            <tr>   
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td>Deleted Product</td>
+                                <td> 
+                                {/* <Link className='mr-1'  style={{'fontWeight':'bold'}} to={'/edit/'+prodId} disabled>Edit|</Link>
+                                <Link className='mr-1' style={{ 'fontWeight':'bold','color':'red'}} onClick={productDelete} disabled>|Delete</Link> */}
+                                </td>
+                            </tr>
+                            </tbody>
+                            }
                         </Table>
                     </Card>
                 </Col>

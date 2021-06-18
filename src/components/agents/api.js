@@ -46,4 +46,12 @@ export const uploadProduct = async(data)=>{
 	const response = await axios.post(`${baseURL}/product/upload`, data, config);
 		// console.log(image1);
 		return (response.data.data);
-	}
+}
+export const editProduct = async(data)=>{
+	const config = {
+		headers: { 'content-type': 'multipart/form-data' }
+	   }
+	const response = await axios.post(`${baseURL}/product/upload`, data, config);
+		// console.log(image1);
+		return (response.data.data);
+}

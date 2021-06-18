@@ -15,6 +15,7 @@ import { categoriesFetch } from './redux/actions';
 import { useDispatch } from 'react-redux';
 import ViewProduct from './components/ProductManager/ViewProduct';
 import UploadProduct from './components/ProductManager/UploadProduct';
+import EditProduct from './components/ProductManager/EditProduct';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
         <LoggedInRoute path="/products" component={ProductManagement} />
         <LoggedInRoute path="/upload" component={UploadProduct} />
         <LoggedInRoute path="/product/:prodId" component={ViewProduct} />
+        <LoggedInRoute path ="/edit/:prodId" component={EditProduct}/>
       </Switch>
     </Router>
   );
