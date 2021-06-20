@@ -48,16 +48,6 @@ export default function UploadProduct() {
         })
     }
 
-    // const image1handler = (evt) => {
-    //     setImage1(evt.target.files[0]); 
-    // }
-    // const image2handler = (evt) => {
-    //     setImage2(evt.target.files[0]);
-    // }
-    // const image3handler = (evt) => {
-    //     setImage3(evt.target.files[0]);
-    // }
-
     const upload = async () => {
         const data = new FormData()
         data.append('image1', images.image1);

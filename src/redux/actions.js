@@ -1,6 +1,6 @@
 import {LOGIN , IS_LOADING, IS_BTN_DISABLED,
     CATEGORIES_LOADED, PRODUCTS_LOADED, PRODUCTS_COUNTED,
-    PRODUCTS_AVAILABILITY_LOADED, VALUE_SELECTED, SPECIFIC_PRODUCT_FETCHED
+    PRODUCTS_AVAILABILITY_LOADED, VALUE_SELECTED, SPECIFIC_PRODUCT_FETCHED, SPECIFIC_CATEGORY_FETCHED
 } from "./actionTypes";
 
 
@@ -51,4 +51,8 @@ export const valueSelected = (value)=>({
 export const productFetchedById = (value)=>({
     type : SPECIFIC_PRODUCT_FETCHED,
     value
+})
+export const categoryFetchedById = (category)=>({
+    type: SPECIFIC_CATEGORY_FETCHED,
+    category
 })

@@ -1,7 +1,8 @@
-import { CATEGORIES_LOADED  } from "../actionTypes";
+import { CATEGORIES_LOADED, SPECIFIC_CATEGORY_FETCHED  } from "../actionTypes";
 
 const defaultState = {
-categories:[]
+categories:[],
+specificCategory:{}
 }
 
 const category = (state = defaultState, action) => {
@@ -12,6 +13,11 @@ const category = (state = defaultState, action) => {
         ...state,
         categories: action.categories,
       };
+    case SPECIFIC_CATEGORY_FETCHED:
+      return {
+        ...state,
+        specificCategory : action.category
+      }
     default:
         return state;
   }

@@ -39,6 +39,11 @@ export const getProductById = async(id) => {
 	return (response.data.data);
 
 }
+export const getCategoryById = async(id) => {
+	const response = await axios.get(`${baseURL}/product/category/${id}`);
+	return (response.data.data);
+}
+
 export const uploadProduct = async(data)=>{
 	const config = {
 		headers: { 'content-type': 'multipart/form-data' }
@@ -47,11 +52,11 @@ export const uploadProduct = async(data)=>{
 		// console.log(image1);
 		return (response.data.data);
 }
-export const editProduct = async(data)=>{
+export const editProduct = async(data,prodId)=>{
 	const config = {
 		headers: { 'content-type': 'multipart/form-data' }
 	   }
-	const response = await axios.post(`${baseURL}/product/upload`, data, config);
-		// console.log(image1);
+	const response = await axios.post(`${baseURL}/product/edit/${prodId}`, data, config);
+		console.log(response);
 		return (response.data.data);
 }
