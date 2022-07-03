@@ -14,6 +14,7 @@ export default function NotLoggedInRoute({ Component, ...rest }) {
     var token = localStorage.getItem('token');
     if (token) {
         history.push('/dashboard');
+        
     }
 
     return (
